@@ -1,0 +1,95 @@
+{
+ "updatedAt": null,
+ "limit": 20,
+ "totalCount": 2,
+ "nextCursor": null,
+ "jobs": [
+  {
+   "title": "Cloud Finance Functional",
+   "excerpt": "We are seeking an experienced Oracle Finance Functional Consultant to lead end-to-end implementations and support Oracle Finance Cloud modules (AP, AR, GL, CE, EXP, FA).",
+   "companyName": "Inoapps",
+   "companySlug": "inoapps",
+   "companyLogo": "https://cdn-images.himalayas.app/krbhaxcqpigrlv1icbmw4k3b95ez",
+   "employmentType": "Full Time",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Senior"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "India"
+   ],
+   "timezoneRestrictions": [
+    5.5
+   ],
+   "categories": [
+    "ERP-Consultant",
+    "Oracle-ERP-Consultant",
+    "Finance-Consultant",
+    "Functional-Consultant",
+    "ERP-Finance-Consultant",
+    "Cloud-Finance",
+    "Cloud-Financial-Management",
+    "Oracle-Cloud-Finance",
+    "Oracle-Cloud-Financials",
+    "Oracle-Cloud-ERP-Financials",
+    "Finance"
+   ],
+   "parentCategories": [
+    "Finance"
+   ],
+   "description": "<p>We are seeking an experienced <strong>Oracle Finance Functional Consultant</strong> to lead <strong>end-to-end implementations</strong> and support <strong>Oracle Finance Cloud</strong> modules (<strong>AP, AR, GL, CE, EXP, FA</strong>). The role involves <strong>requirement gathering, system configuration, process mapping, and user training</strong> while collaborating with cross-functional teams. Candidates should have <strong>5+ years of experience</strong>, with at least <strong>five full-cycle implementations</strong>. Strong communication, problem-solving skills, and the ability to work in a fast-paced environment are essential. <strong>Oracle Finance Cloud certification</strong> is an added advantage.</p><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
+   "pubDate": 1792813288,
+   "expiryDate": 1797997287,
+   "applicationLink": "https://himalayas.app/companies/inoapps/jobs/cloud-finance-functional?utm_source=api",
+   "guid": "https://himalayas.app/companies/inoapps/jobs/cloud-finance-functional"
+  },
+  {
+   "title": "Licensed Real Estate Agent",
+   "excerpt": "Looking for a brokerage where you can build your business on your terms?",
+   "companyName": "Vie Management",
+   "companySlug": "vie-management",
+   "companyLogo": "https://cdn-images.himalayas.app/vlhjl889zhtt09nb8bsbl3gd8wj6",
+   "employmentType": "Contractor",
+   "minSalary": null,
+   "maxSalary": null,
+   "salaryPeriod": "annual",
+   "seniority": [
+    "Mid-level"
+   ],
+   "currency": null,
+   "locationRestrictions": [
+    "United States"
+   ],
+   "timezoneRestrictions": [
+    -10,
+    -9,
+    -8,
+    -7,
+    -6,
+    -5,
+    14
+   ],
+   "categories": [
+    "Licensed-Real-Estate-Agent",
+    "Real-Estate-Agent",
+    "Commercial-Real-Estate-Agent",
+    "Licensed-Real-Estate-Professional",
+    "Licensed-Sales-Agent",
+    "Licensed-Real-Estate-Associate",
+    "Real-Estate-Sales-Agent",
+    "Local-Real-Estate-Agent"
+   ],
+   "parentCategories": [
+    "Sales"
+   ],
+   "description": "<p>Looking for a brokerage where you can build your business on your terms?</p><p>JBV Advisors welcomes licensed Florida real estate agents seeking a flexible, supportive brokerage affiliation. Whether you work in real estate full time, handle occasional transactions, or simply need a place to hang your license while balancing other commitments, there’s room for you here.</p><p>We welcome agents at every stage of their careers. You set your own goals and pace, without pressure to meet commission quotas.</p><h3>What We Offer</h3><ul>\n<li>Flexible scheduling for full-time and part-time agents</li>\n<li>Independence to build and manage your business</li>\n<li>A collaborative team and brokerage support</li>\n<li>Access to resources and tools to support your transactions</li>\n<li>A place to hang your license and pursue opportunities as they arise</li>\n</ul><h3>Requirements</h3><ul>\n<li>Active Florida real estate license</li>\n<li>Strong communication and interpersonal skills</li>\n<li>Ability to manage your clients and transactions independently</li>\n<li>Professionalism and commitment to client service</li>\n</ul><h3>Compensation</h3><p>This is a commission-based opportunity. Transaction fees apply to sales and rentals, with enhanced commission opportunities available for qualifying higher-value residential and commercial transactions. The full fee and commission structure will be reviewed before you join.</p><h3>Apply</h3><p>Submit your résumé or a brief introduction telling us about your experience and what you’re looking for in a brokerage.</p><p>Originally posted on <a href=\"https://himalayas.app\">Himalayas</a></p>",
+   "pubDate": 1792814766,
+   "expiryDate": 1797998764,
+   "applicationLink": "https://himalayas.app/companies/vie-management/jobs/licensed-real-estate-agent-6351587988?utm_source=api",
+   "guid": "https://himalayas.app/companies/vie-management/jobs/licensed-real-estate-agent-6351587988"
+  }
+ ]
+}

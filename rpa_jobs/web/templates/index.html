@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>Vacancy collection · Job Vacancy Bot</title>
+  <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='icon.svg') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+  <script>
+    (function () {
+      try {
+        var forced = new URLSearchParams(window.location.search).get("theme");
+        if (forced === "dark" || forced === "light") {
+          document.documentElement.dataset.theme = forced;
+          return;
+        }
+        var stored = localStorage.getItem("rpa-theme");
+        var theme = stored || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+        document.documentElement.dataset.theme = theme;
+      } catch (error) { /* private mode: keep the light default */ }
+    })();
+  </script>
+</head>
+<body>
+
+<a class="cds-skip" href="#top">Skip to main content</a>
+
+<!-- Carbon icons ------------------------------------------------------------>
+<svg class="cds-sprite" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+{% include '_icons.html' %}
+</svg>
+
+<!-- UI shell --------------------------------------------------------------->
+<header class="cds-header">
+  <a class="cds-header__brand" href="#top" aria-label="Job Vacancy Bot — back to top">
+    <svg class="cds-header__logo" aria-hidden="true"><use href="#i-bot"/></svg>
+    <span class="cds-header__product">Job Vacancy Bot</span>
+  </a>
+  <span class="cds-header__divider" aria-hidden="true"></span>
+  <span class="cds-header__suffix">RPA console</span>
+
+  <div class="cds-header__actions">
+    <span class="cds-header__env"><i aria-hidden="true"></i>Local · 127.0.0.1</span>
+    <time class="cds-header__clock" id="clock">--:--:--</time>
+    <button class="cds-header__icon-btn" id="theme-toggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
+      <svg class="cds-icon" aria-hidden="true"><use id="theme-icon" href="#i-moon"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="cds-shell">
+  <!-- side navigation ----------------------------------------------------->
+  <nav class="cds-sidenav" aria-label="Console sections">
+    <a class="cds-sidenav__item is-active" href="#top" data-section="top" data-label="Overview" aria-label="Overview">
+      <svg class="cds-icon" aria-hidden="true"><use href="#i-dashboard"/></svg>
+    </a>
+    <a class="cds-sidenav__item" href="#config" data-section="config" data-label="Configure" aria-label="Configure">
+      <svg class="cds-icon" aria-hidden="true"><use href="#i-settings--adjust"/></svg>
+    </a>
+    <a class="cds-sidenav__item" href="#results-card" data-section="results-card" data-label="Results" aria-label="Results">
+      <svg class="cds-icon" aria-hidden="true"><use href="#i-table"/></svg>
+    </a>
+    <a class="cds-sidenav__item" href="#report-library" data-section="report-library" data-label="Reports" aria-label="Reports">
+      <svg class="cds-icon" aria-hidden="true"><use href="#i-document"/></svg>
+    </a>
+
+    <div class="cds-sidenav__foot">
+      <span class="cds-sidenav__version">v{{ version }}</span>
+    </div>
+  </nav>
+
+  <!-- main ----------------------------------------------------------------->
+  <main class="cds-content" id="top" tabindex="-1">
+    <div class="cds-page-head">
+      <nav class="cds-breadcrumb" aria-label="Breadcrumb">
+        <span>Automation</span>
+        <svg class="cds-icon cds-breadcrumb__sep" aria-hidden="true"><use href="#i-chevron--right"/></svg>
+        <span>Job Vacancy Bot</span>
+      </nav>
+
+      <div class="cds-page-head__main">
+        <div class="cds-page-head__copy">
+          <h1 class="cds-heading-05">Vacancy collection</h1>
+          <p class="cds-body-01 cds-page-head__lede">
+            Collect live public listings, filter to India, and export a formatted Excel workbook.
+          </p>
+        </div>
+        <div class="cds-page-head__status">
+          <span class="cds-tag is-idle" id="status-pill" role="status" aria-live="polite">Idle</span>
+          <span class="cds-run-meta" id="run-meta">No run yet</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="cds-grid">
+      <!-- configuration -------------------------------------------------->
+      <section class="cds-col-5 cds-section" id="config" aria-labelledby="config-title">
+        <div class="cds-section__head">
+          <div>
+            <p class="cds-eyebrow">Run parameters</p>
+            <h2 class="cds-heading-03" id="config-title">Run configuration</h2>
+          </div>
+          <span class="cds-tag cds-tag--outline"><i aria-hidden="true"></i>Live feeds</span>
+        </div>
+
+        <form class="cds-form" id="run-form" autocomplete="off">
+          <div class="cds-form-item">
+            <label class="cds-label" for="portal">Source</label>
+            <div class="cds-select-wrap">
+              <select class="cds-select" id="portal" name="portal">
+                {% for name in portals %}
+                <option value="{{ name }}" {% if name == defaults.portal %}selected{% endif %}>{{ name }} — {{ portal_labels[name] }}</option>
+                {% endfor %}
+              </select>
+              <svg class="cds-select__chevron" aria-hidden="true"><use href="#i-chevron--down"/></svg>
+            </div>
+            <p class="cds-helper"><code>all</code> fans out to every live source and interleaves the results.</p>
+          </div>
+
+          <div class="cds-form-row">
+            <div class="cds-form-item">
+              <label class="cds-label" for="limit">Max vacancies</label>
+              <input class="cds-text-input" id="limit" name="limit" type="number" min="1" max="500" step="1" value="{{ defaults.limit }}">
+            </div>
+            <div class="cds-form-item">
+              <label class="cds-label" for="match">Keyword match</label>
+              <div class="cds-select-wrap">
+                <select class="cds-select" id="match" name="match">
+                  <option value="any" {% if defaults.match == 'any' %}selected{% endif %}>Any keyword</option>
+                  <option value="all" {% if defaults.match == 'all' %}selected{% endif %}>All keywords</option>
+                </select>
+                <svg class="cds-select__chevron" aria-hidden="true"><use href="#i-chevron--down"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="cds-form-item">
+            <label class="cds-label" for="countries">Country filter</label>
+            <input class="cds-text-input" id="countries" name="countries" type="text" value="{{ defaults.countries }}" placeholder="India, United Kingdom — blank = worldwide">
+            <p class="cds-helper">India is the default. City names such as Bengaluru count. Type <code>none</code> for a worldwide run.</p>
+          </div>
+
+          <div class="cds-form-item">
+            <label class="cds-label" for="keywords">Keywords <span class="cds-label__optional">Optional</span></label>
+            <input class="cds-text-input" id="keywords" name="keywords" type="text" value="{{ defaults.keywords }}" placeholder="python, django, data engineer">
+            <p class="cds-helper">Comma-separated. Matches title, company, location, category, skills and description.</p>
+          </div>
+
+          <div class="cds-toggle-group">
+            <label class="cds-toggle">
+              <span class="cds-toggle__copy">
+                <span class="cds-toggle__title">Open detail pages</span>
+                <span class="cds-toggle__desc">Adds description, salary and direct apply links</span>
+              </span>
+              <input id="fetch_details" name="fetch_details" type="checkbox" {% if defaults.fetch_details %}checked{% endif %}>
+              <span class="cds-toggle__track" aria-hidden="true"></span>
+            </label>
+
+            <label class="cds-toggle">
+              <span class="cds-toggle__copy">
+                <span class="cds-toggle__title">Append to existing report</span>
+                <span class="cds-toggle__desc">Keeps earlier rows and skips duplicates</span>
+              </span>
+              <input id="append" name="append" type="checkbox">
+              <span class="cds-toggle__track" aria-hidden="true"></span>
+            </label>
+          </div>
+
+          <details class="cds-accordion">
+            <summary class="cds-accordion__summary">
+              <span>Advanced options</span>
+              <svg class="cds-icon cds-accordion__chevron" aria-hidden="true"><use href="#i-chevron--down"/></svg>
+            </summary>
+            <div class="cds-accordion__body">
+              <div class="cds-form-item">
+                <label class="cds-label" for="filename">Report filename</label>
+                <input class="cds-text-input" id="filename" name="filename" type="text" placeholder="auto: job_vacancies_&lt;timestamp&gt;.xlsx">
+                <p class="cds-helper">Saved inside the project <code>output/</code> folder.</p>
+              </div>
+              <div class="cds-form-item">
+                <label class="cds-label" for="delay">Request delay</label>
+                <input class="cds-text-input" id="delay" name="delay" type="number" min="0" max="30" step="0.1" value="{{ defaults.delay }}">
+                <p class="cds-helper">Minimum wait in seconds between requests to the same host.</p>
+              </div>
+            </div>
+          </details>
+
+          <button class="cds-btn cds-btn--primary cds-btn--full" id="start-btn" type="submit">
+            <span class="cds-btn__spinner" aria-hidden="true"></span>
+            <svg class="cds-btn__icon" aria-hidden="true"><use href="#i-play--filled"/></svg>
+            <span class="cds-btn__label">Start run</span>
+            <kbd class="cds-btn__kbd">Ctrl ↵</kbd>
+          </button>
+          <p class="cds-form-error" id="form-error" role="alert"></p>
+        </form>
+
+        <div class="cds-coverage">
+          <div class="cds-coverage__head">
+            <span class="cds-label">Source coverage</span>
+            <span class="cds-run-meta">{{ sources|length }} live boards</span>
+          </div>
+          <ul class="cds-coverage__list">
+            {% for source in sources %}
+            <li><i aria-hidden="true"></i>{{ source }}</li>
+            {% endfor %}
+          </ul>
+          <p class="cds-helper">Queried when Source is <code>all</code>. LinkedIn and Remotive are excluded — their robots.txt disallows automated access.</p>
+        </div>
+      </section>
+
+      <!-- execution ------------------------------------------------------>
+      <section class="cds-col-11 cds-section" id="run" aria-labelledby="run-title">
+        <div class="cds-section__head">
+          <div>
+            <p class="cds-eyebrow">Execution</p>
+            <h2 class="cds-heading-03" id="run-title">Robot activity</h2>
+          </div>
+          <span class="cds-run-meta cds-mono" id="run-meta-run">idle</span>
+        </div>
+
+        <div class="cds-progress-block">
+          <div class="cds-progress-head">
+            <span class="cds-progress-label" id="progress-label">Ready — configure a run and press Start.</span>
+            <span class="cds-progress-percent cds-mono" id="progress-percent">0%</span>
+          </div>
+          <div class="cds-progress" id="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Run progress">
+            <div class="cds-progress__bar" id="progress-bar"></div>
+          </div>
+        </div>
+
+        <div class="cds-metrics" id="stats"></div>
+
+        <div class="cds-flow" id="flow" aria-label="Automation workflow">
+          <div class="cds-flow__track">
+            <div class="cds-flow__step" data-stage="init">
+              <span class="cds-flow__marker">1</span>
+              <span class="cds-flow__label">Initialise</span>
+            </div>
+            <span class="cds-flow__line" aria-hidden="true"></span>
+            <div class="cds-flow__step" data-stage="discover">
+              <span class="cds-flow__marker">2</span>
+              <span class="cds-flow__label">Discover</span>
+            </div>
+            <span class="cds-flow__line" aria-hidden="true"></span>
+            <div class="cds-flow__step" data-stage="process">
+              <span class="cds-flow__marker">3</span>
+              <span class="cds-flow__label">Process</span>
+            </div>
+            <span class="cds-flow__line" aria-hidden="true"></span>
+            <div class="cds-flow__step" data-stage="report">
+              <span class="cds-flow__marker">4</span>
+              <span class="cds-flow__label">Report</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="cds-log-block">
+          <div class="cds-log-head">
+            <div class="cds-log-head__title">
+              <svg class="cds-icon" aria-hidden="true"><use href="#i-terminal"/></svg>
+              <h3 class="cds-heading-02">Transaction log</h3>
+            </div>
+            <span class="cds-log-count cds-mono" id="log-count"></span>
+          </div>
+          <div class="cds-log" id="log" aria-live="polite" aria-label="Live run log">
+            <div class="cds-log__empty">
+              <svg class="cds-icon" aria-hidden="true"><use href="#i-terminal"/></svg>
+              <span>Log lines stream here once the robot starts.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- results ----------------------------------------------------------->
+    <section class="cds-section cds-section--table" id="results-card" hidden aria-labelledby="results-title">
+      <div class="cds-section__head">
+        <div>
+          <p class="cds-eyebrow">Results</p>
+          <h2 class="cds-heading-03" id="results-title">Collected vacancies</h2>
+        </div>
+        <div class="cds-section__actions">
+          <span class="cds-run-meta" id="results-meta"></span>
+          <a class="cds-btn cds-btn--tertiary cds-btn--sm" id="download" href="#" hidden>
+            <svg class="cds-btn__icon" aria-hidden="true"><use href="#i-download"/></svg>
+            <span>Excel report</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="cds-chips" id="source-chips"></div>
+
+      <div class="cds-table-wrap">
+        <table class="cds-table">
+          <caption class="sr-only">Vacancies collected in this run</caption>
+          <thead>
+            <tr>
+              <th scope="col">Vacancy</th>
+              <th scope="col">Location</th>
+              <th scope="col">Arrangement</th>
+              <th scope="col">Salary</th>
+              <th scope="col">Posted</th>
+              <th scope="col">Source</th>
+              <th scope="col"><span class="sr-only">Application link</span></th>
+            </tr>
+          </thead>
+          <tbody id="jobs-body"></tbody>
+        </table>
+      </div>
+      <p class="cds-helper cds-preview-note" id="preview-note" hidden></p>
+    </section>
+
+    <!-- report library ---------------------------------------------------->
+    <section class="cds-section cds-section--table" id="report-library" aria-labelledby="reports-title">
+      <div class="cds-section__head">
+        <div>
+          <p class="cds-eyebrow">Output</p>
+          <h2 class="cds-heading-03" id="reports-title">Report library</h2>
+        </div>
+        <span class="cds-run-meta cds-mono">output/</span>
+      </div>
+
+      <div class="cds-table-wrap">
+        <table class="cds-table cds-table--reports">
+          <caption class="sr-only">Excel reports in the output folder</caption>
+          <thead>
+            <tr>
+              <th scope="col">Report</th>
+              <th scope="col">Size</th>
+              <th scope="col">Modified</th>
+              <th scope="col"><span class="sr-only">Download</span></th>
+            </tr>
+          </thead>
+          <tbody id="reports-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer class="cds-footer">
+      <span>Job Vacancy Bot <span class="cds-mono">v{{ version }}</span> · live public job feeds only</span>
+      <span class="cds-mono">127.0.0.1 · local interface</span>
+    </footer>
+  </main>
+</div>
+
+<div class="cds-toasts" id="toasts" aria-live="polite" aria-atomic="false"></div>
+
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

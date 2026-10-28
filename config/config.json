@@ -1,0 +1,414 @@
+{
+  "portal": "all",
+  "crawl": {
+    "max_items": 50,
+    "fetch_details": true,
+    "delay_seconds": 0.4,
+    "timeout_seconds": 20,
+    "retries": 3,
+    "backoff_seconds": 1.2,
+    "respect_robots": true,
+    "user_agent": "RPAJobBot/1.0 (personal job-search automation)"
+  },
+  "filters": {
+    "keywords": [],
+    "countries": [
+      "India"
+    ],
+    "match": "any"
+  },
+  "output": {
+    "directory": "output",
+    "filename_prefix": "job_vacancies",
+    "description_limit": 1200,
+    "skills_limit": 12
+  },
+  "skills": [
+    {
+      "label": "Python",
+      "patterns": [
+        "python"
+      ]
+    },
+    {
+      "label": "Django",
+      "patterns": [
+        "django"
+      ]
+    },
+    {
+      "label": "Flask",
+      "patterns": [
+        "flask"
+      ]
+    },
+    {
+      "label": "FastAPI",
+      "patterns": [
+        "fastapi",
+        "fast api"
+      ]
+    },
+    {
+      "label": "SQL",
+      "patterns": [
+        "sql"
+      ]
+    },
+    {
+      "label": "PostgreSQL",
+      "patterns": [
+        "postgresql",
+        "postgres"
+      ]
+    },
+    {
+      "label": "MySQL",
+      "patterns": [
+        "mysql"
+      ]
+    },
+    {
+      "label": "MongoDB",
+      "patterns": [
+        "mongodb",
+        "mongo db"
+      ]
+    },
+    {
+      "label": "Redis",
+      "patterns": [
+        "redis"
+      ]
+    },
+    {
+      "label": "AWS",
+      "patterns": [
+        "aws",
+        "amazon web services"
+      ]
+    },
+    {
+      "label": "Azure",
+      "patterns": [
+        "azure"
+      ]
+    },
+    {
+      "label": "GCP",
+      "patterns": [
+        "gcp",
+        "google cloud"
+      ]
+    },
+    {
+      "label": "Docker",
+      "patterns": [
+        "docker"
+      ]
+    },
+    {
+      "label": "Kubernetes",
+      "patterns": [
+        "kubernetes",
+        "k8s"
+      ]
+    },
+    {
+      "label": "Terraform",
+      "patterns": [
+        "terraform"
+      ]
+    },
+    {
+      "label": "Ansible",
+      "patterns": [
+        "ansible"
+      ]
+    },
+    {
+      "label": "Linux",
+      "patterns": [
+        "linux"
+      ]
+    },
+    {
+      "label": "Git",
+      "patterns": [
+        "git"
+      ]
+    },
+    {
+      "label": "REST API",
+      "patterns": [
+        "rest api",
+        "restful",
+        "rest"
+      ]
+    },
+    {
+      "label": "GraphQL",
+      "patterns": [
+        "graphql"
+      ]
+    },
+    {
+      "label": "JavaScript",
+      "patterns": [
+        "javascript",
+        "java script"
+      ]
+    },
+    {
+      "label": "TypeScript",
+      "patterns": [
+        "typescript",
+        "type script"
+      ]
+    },
+    {
+      "label": "React",
+      "patterns": [
+        "react"
+      ]
+    },
+    {
+      "label": "Vue.js",
+      "patterns": [
+        "vue.js",
+        "vuejs",
+        "vue"
+      ]
+    },
+    {
+      "label": "Angular",
+      "patterns": [
+        "angular"
+      ]
+    },
+    {
+      "label": "Node.js",
+      "patterns": [
+        "node.js",
+        "nodejs"
+      ]
+    },
+    {
+      "label": "HTML",
+      "patterns": [
+        "html"
+      ]
+    },
+    {
+      "label": "CSS",
+      "patterns": [
+        "css"
+      ]
+    },
+    {
+      "label": "pytest",
+      "patterns": [
+        "pytest"
+      ]
+    },
+    {
+      "label": "Celery",
+      "patterns": [
+        "celery"
+      ]
+    },
+    {
+      "label": "RabbitMQ",
+      "patterns": [
+        "rabbitmq"
+      ]
+    },
+    {
+      "label": "Kafka",
+      "patterns": [
+        "kafka"
+      ]
+    },
+    {
+      "label": "Spark",
+      "patterns": [
+        "spark"
+      ]
+    },
+    {
+      "label": "Airflow",
+      "patterns": [
+        "airflow"
+      ]
+    },
+    {
+      "label": "pandas",
+      "patterns": [
+        "pandas"
+      ]
+    },
+    {
+      "label": "NumPy",
+      "patterns": [
+        "numpy"
+      ]
+    },
+    {
+      "label": "PyTorch",
+      "patterns": [
+        "pytorch"
+      ]
+    },
+    {
+      "label": "TensorFlow",
+      "patterns": [
+        "tensorflow"
+      ]
+    },
+    {
+      "label": "scikit-learn",
+      "patterns": [
+        "scikit-learn",
+        "sklearn"
+      ]
+    },
+    {
+      "label": "Machine Learning",
+      "patterns": [
+        "machine learning"
+      ]
+    },
+    {
+      "label": "LLM",
+      "patterns": [
+        "llm",
+        "large language model"
+      ]
+    },
+    {
+      "label": "LangChain",
+      "patterns": [
+        "langchain"
+      ]
+    },
+    {
+      "label": "OpenAI",
+      "patterns": [
+        "openai"
+      ]
+    },
+    {
+      "label": "Selenium",
+      "patterns": [
+        "selenium"
+      ]
+    },
+    {
+      "label": "Playwright",
+      "patterns": [
+        "playwright"
+      ]
+    },
+    {
+      "label": "Agile",
+      "patterns": [
+        "agile"
+      ]
+    },
+    {
+      "label": "Scrum",
+      "patterns": [
+        "scrum"
+      ]
+    },
+    {
+      "label": "CI/CD",
+      "patterns": [
+        "ci/cd",
+        "continuous integration",
+        "continuous delivery"
+      ]
+    },
+    {
+      "label": "Microservices",
+      "patterns": [
+        "microservices",
+        "micro services"
+      ]
+    }
+  ],
+  "portals": {
+    "all": {
+      "sources": [
+        "hasjob",
+        "shine",
+        "internshala",
+        "ycombinator",
+        "himalayas",
+        "python-jobs",
+        "remoteok",
+        "workingnomads"
+      ]
+    },
+    "shine": {
+      "search_url": "https://www.shine.com/job-search/{query}-jobs-in-india",
+      "default_query": "software",
+      "max_pages": 2
+    },
+    "internshala": {
+      "base_url": "https://internshala.com/jobs/",
+      "max_pages": 2
+    },
+    "ycombinator": {
+      "base_url": "https://www.ycombinator.com/jobs/location/india",
+      "max_pages": 1
+    },
+    "hasjob": {
+      "base_url": "https://hasjob.co/feed"
+    },
+    "himalayas": {
+      "base_url": "https://himalayas.app/jobs/api",
+      "countries": [
+        "India"
+      ],
+      "max_pages": 60,
+      "page_size": 20
+    },
+    "arbeitnow": {
+      "base_url": "https://www.arbeitnow.com/api/job-board-api",
+      "max_pages": 3
+    },
+    "jobicy": {
+      "base_url": "https://jobicy.com/api/jobs",
+      "max_pages": 2
+    },
+    "remoteok": {
+      "base_url": "https://remoteok.com/api"
+    },
+    "workingnomads": {
+      "base_url": "https://www.workingnomads.com/api/exposed_jobs/"
+    },
+    "weworkremotely": {
+      "feeds": [
+        "https://weworkremotely.com/categories/remote-programming-jobs.rss",
+        "https://weworkremotely.com/categories/remote-devops-sysadmin-jobs.rss",
+        "https://weworkremotely.com/categories/remote-design-jobs.rss"
+      ]
+    },
+    "python-jobs": {
+      "base_url": "https://www.python.org/jobs/",
+      "max_pages": 1,
+      "selectors": {
+        "card": "ol.list-recent-jobs > li",
+        "title": "h2.listing-company a",
+        "company_name": ".listing-company-name",
+        "location": ".listing-location",
+        "date": "time",
+        "types": ".listing-job-type a",
+        "category": ".listing-company-category a",
+        "detail_description": "div.job-description",
+        "detail_apply_link": "a[href^='http']"
+      }
+    }
+  }
+}
